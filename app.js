@@ -1,5 +1,8 @@
-require('dotenv').config()
-console.log(process.env)
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+    console.log('Environment variables loaded from .env');
+}
+
 
 const express = require('express');
 const app = express()
