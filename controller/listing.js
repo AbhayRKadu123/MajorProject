@@ -56,7 +56,7 @@ module.exports.RenderNewPostForm=async (req, res) => {
 
 
     const { error, value } = schema.validate(req.body);
-    console.log(error)
+    
     if (error) {
         throw new ExpressError(400, error.message);
 

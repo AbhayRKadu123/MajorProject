@@ -5,7 +5,7 @@ const ejsMate=require('ejs-mate');
 const User= require('../Models/user.js');
 
 
-module.exports.renderSignup=(req,res)=>{
+module.exports.renderSignup=async(req,res)=>{
     res.render("users/signup.ejs")
     }
 
@@ -32,12 +32,12 @@ module.exports.renderSignup=(req,res)=>{
            
         }
 
-        module.exports.RenderLogin=(req,res)=>{
+        module.exports.RenderLogin=async(req,res)=>{
             res.render("users/login.ejs")
         }
 
 
-        module.exports.Login=(req,res)=>{
+        module.exports.Login=async(req,res)=>{
             req.flash("success","welcome back to wanderlust")
             console.log('url='+res.locals.url)
             var url=res.locals.url;
@@ -48,7 +48,7 @@ module.exports.renderSignup=(req,res)=>{
        res.redirect(url);
     }
 
-    module.exports.LogOut=(req,res,next)=>{
+    module.exports.LogOut=async(req,res,next)=>{
         req.logOut((err)=>{
             if(err){
                 res.send("something went wrong")
