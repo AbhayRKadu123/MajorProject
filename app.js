@@ -74,11 +74,16 @@ app.use((req,res,next)=>{
    
         res.locals.success=req.flash('success');
 
-
+console.log(req.user)
     
     
         res.locals.error=req.flash('error');
-        res.locals.currentuser=req.user || null;
+        if(typeof req.user=='undefined'){
+            res.locals.currentuser=null
+        }else{
+            res.locals.currentuser=req.user;
+
+        }
         console.log( res.locals.success)
 
         console.log( res.locals.error)
