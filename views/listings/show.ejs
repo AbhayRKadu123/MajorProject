@@ -1,0 +1,112 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <%success%>
+    <div class="container">
+        <h1><%= Data.title %></h1>
+        <div class="text-center mb-3">
+            <img src="<%= Data.image.url || '/path/to/default-image.jpg' %>" alt="Hotel" class="card-img"
+                onerror="this.onerror=null;this.src='/path/to/default-image.jpg';">
+        </div>
+        <p><i><b>Owner :</b> <%= Data.owner.username %></i></p>
+        <p><%= Data.description %></p>
+        <p class="price">₹ <%= Data.price.toLocaleString("en-IN") %> per night</p>
+        <p class="location">Location: <%= Data.location %></p>
+        <p>Country: <%= Data.country %></p>
+
+        <% if(currentuser && currentuser._id.equals(Data.owner._id)){ %>
+            <a href="/listings/<%= Data._id %>/edit" class="btn btn-primary">Edit This Entry</a>
+            <form method="post" action="/listings/<%= Data._id %>?_method=Delete" class="mt-3">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        <% } %>
+
+        <% if(currentuser){ %>
+            <form method="post" novalidate action="/listings/<%= Data._id %>/reviews"
+                class="needs-validation p-4 shadow-sm bg-white rounded-3">
+                <h3 class="mb-4 text-center text-secondary">Leave a Review</h3>
+                <div class="mb-4">
+                    <label for="rating" class="form-label fw-bold">Rating</label>
+                    <input type="range" min="1" max="5" value="3" id="rating" name="review[rating]" class="form-range custom-slider" required>
+                    <div class="d-flex justify-content-between mt-2" id="star-rating">
+                        <i class="far fa-star" data-value="1"></i>
+                        <i class="far fa-star" data-value="2"></i>
+                        <i class="far fa-star" data-value="3"></i>
+                        <i class="far fa-star" data-value="4"></i>
+                        <i class="far fa-star" data-value="5"></i>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="comment" class="form-label fw-bold">Comment</label>
+                    <textarea required name="review[comment]" id="comment" class="form-control" rows="5"
+                        placeholder="Share your experience..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold">Submit Review</button>
+            </form>
+        <% } %>
+
+        <div class="container row">
+            <% if(Data.reviews.length > 0){ %>
+                <h1 class="display-3">Reviews</h1>
+            <% } %>
+            <% for(el of Data.reviews){ %>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card g-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Author :</strong> <%= el.author.username %></h5>
+                            <p class="card-text"><strong>Rating :</strong> <%= el.rating %>/5<span class="fa fa-star checked" style="color: orange;"></span></p>
+                            <p class="card-text"><strong>Comment :</strong> <%= el.comment %></p>
+                            <p class="card-text"><strong>Date :</strong> <%= new Date(el.createdAt).toLocaleDateString() %></p>
+                            <form method="post" action="/listings/<%= Data.id %>/<%= el.id %>/delete?_method=Delete">
+                                <button class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+        <!-- Map Container -->
+        <div id="map" style="height: 400px; width: 100%;"></div>
+
+    </div>
+
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize the map centered at a default location
+            var map = L.map('map').setView([20.5937, 78.9629], 5); // Default to center on India
+
+            // Set up the OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Geocode location from Data.location
+            const location = "<%= Data.location %>";
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const latitude = data[0].lat;
+                        const longitude = data[0].lon;
+
+                        // Update the map view and add a marker at the fetched coordinates
+                        map.setView([latitude, longitude], 13);
+
+                        // Add a marker at the fetched coordinates
+                        L.marker([latitude, longitude]).addTo(map)
+                            .bindPopup(`<b>${location}</b><br>Latitude: ${latitude}, Longitude: ${longitude}`)
+                            .openPopup();
+                    } else {
+                        console.error("Location not found.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching coordinates:", error);
+                });
+        });
+    </script>
+</body>

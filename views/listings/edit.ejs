@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-4">
+        <h1 class="mb-4 text-center" style="color: #333;">Edit Listing</h1>
+        <form action="/listings/<%=Data._id%>?_method=PUT" enctype="multipart/form-data" novalidate class="needs-validation" method="POST">
+            <div class="mb-4">
+                <label for="title" class="form-label">Title</label>
+                <input id="title" name="listing[title]" value="<%=Data.title%>" type="text" class="form-control form-control-lg" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" name="listing[description]" class="form-control form-control-lg" rows="4" required><%=Data.description%></textarea>
+            </div>
+            preview of the image
+            <div class="mb-4"><img style="min-width: 200px; min-height: 200px;width: 20% ; height: 20%;" src="<%=Data.image.url%>" alt=""></div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Upload Image</label>
+                <input id="image" name="listing[image]"  type="file" class="form-control form-control-lg" >
+            </div>
+            
+            <div class="mb-4">
+                <label for="price" class="form-label">Price</label>
+                <input id="price" name="listing[price]" value="<%= Data.price %>" type="number" class="form-control form-control-lg" required>
+            </div>
+            <div class="mb-4 dropdown">
+                <label for="category" class="form-label">Category</label>
+                <select aria-placeholder="value" va name="listing[category]" id="category" class="form-select" aria-label="Default select example">
+                    <option selected value="<%=Data.category%>">Select new field (Previous field : <%=Data.category%>)</option>
+                    <option value="Mountains">Mountains</option>
+                    <option value="Beach">Beach</option>
+                    <option value="Nature">Nature</option>
+                    <option value="City">City</option>
+                    <option value="Historic">Historic</option>
+                    <option value="Rivers">Rivers</option>  
+                    <option value="Homes">Homes</option>
+                    <option value="Hiking">Hiking</option>
+                    <option value="Snowy">Snowy</option>
+                  </select>
+              </div>
+            
+            <div class="mb-4">
+                <label for="location" class="form-label">Location</label>
+                <input id="location" name="listing[location]" value="<%= Data.location%>" type="text" class="form-control form-control-lg" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="country" class="form-label">Country</label>
+                <input id="country" name="listing[country]" value="<%= Data.country%>" type="text" class="form-control form-control-lg" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+        </form>
+    </div>
+

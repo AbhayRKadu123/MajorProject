@@ -1,0 +1,117 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <!-- Filter Section -->
+
+        <div class="filter-bar d-flex justify-content-start overflow-auto py-2 border-bottom">
+            <div class="filter-item me-3 text-center">
+                <a id="category" href="/listings/Category?value=Mountains"><i class="fas fa-mountain fa-2x mb-1"></i></a>
+                <br>
+                <span>Mountains</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Beach"><i class="fas fa-umbrella-beach fa-2x mb-1"></i></a>
+                <br>
+                <span>Beach</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Nature"><i class="fas fa-tree fa-2x mb-1"></i></a><br>
+                
+                <span>Nature</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=City"> <i class="fas fa-city fa-2x mb-1"></i></a><br>
+               
+                <span>City</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Historic"><i class="fas fa-archway fa-2x mb-1"></i></a><br>
+                
+                <span>Historic</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Rivers"> <i class="fas fa-water fa-2x mb-1"></i></a>
+               <br>
+                <span>Rivers</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Homes"><i class="fas fa-home fa-2x mb-1"></i></a>
+                <br>
+                <span>Homes</span>
+            </div>
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Hiking"> <i class="fas fa-hiking fa-2x mb-1"></i></a>
+               <br>
+                <span>Hiking</span>
+            </div>
+
+            <div class="filter-item me-3 text-center">
+                <a  id="category"  href="/listings/Category?value=Snowy"><i class=" fas fa-snowflake fa-2x mb-1"></i></a>
+                <br>
+                <span>Snowy</span>
+            </div>
+            <div id="Taxes" class="Taxes form-switch form-check-reverse ">
+              <div>    <strong>  <input class=" form-check-input" type="checkbox" id="flexSwitchCheckReverse"></strong>          
+                <label class=" form-check-label" for="flexSwitchCheckReverse"><strong>Display total before taxes</strong></label></div>
+
+              </div>
+            
+  </div>
+          
+              
+        </div>
+        
+
+
+        <!-- Create Listing Button -->
+        <div class="container my-4">
+            <form method="GET" action="/listings/new">
+                <button class="btn btn-primary mb-4">Airbnb your home</button>
+            </form>
+
+            <!-- Listings Section -->
+            <h1 class="mb-4 text-center">Explore new homes</h1>
+            <div class="row">
+                <% if(allListing.length==0){%>
+                    <h1 class="display-1 text-center">No Listing Available</h1>
+                <%}%>
+              
+                <% for (let lst of allListing) { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-sm rounded">
+                            <a href="/listings/<%= lst._id %>" class="stretched-link text-decoration-none">
+                                <img src="<%= lst.image.url %>" class="card-img-top" alt="<%= lst.title %>"
+                                    style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-truncate">
+                                        <%= lst.title %>
+                                    </h5>
+                                    <p class="card-text">
+                                        ₹<%= new Intl.NumberFormat('en-IN').format(lst.price) %> per night&ensp;&ensp;<span class="gst"  style="display:none;color: red;">+18%gst</span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+               
+            </div>
+        </div>
+        <script>
+            const btn=document.querySelector('#flexSwitchCheckReverse');
+            const gst=document.querySelectorAll('.gst');
+            btn.addEventListener('click',(req,res)=>{
+                if(btn.checked){
+for(el of gst){
+    el.style.display='inline'
+}
+
+                }else{
+                    for(el of gst){
+    el.style.display='none'
+} 
+                }
+            })
+           
+        </script>
+    </body>
