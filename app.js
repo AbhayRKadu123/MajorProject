@@ -70,27 +70,21 @@ async function main() {
 app.listen(8080, () => {
     console.log("app is listening")
 })
-app.use((req,res,next)=>{
-   
-        res.locals.success=req.flash('success');
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
 
-console.log(req.user)
-    
-    
-        res.locals.error=req.flash('error');
-        if(typeof req.user=='undefined'){
-            res.locals.currentuser=null
-        }else{
-            res.locals.currentuser=req.user;
+    // Set currentuser to null if req.user is undefined
+    res.locals.currentuser = req.user || null;
 
-        }
-        console.log( res.locals.success)
+    // Debugging logs (remove or comment out in production)
+    console.log('Current User:', res.locals.currentuser);
+    console.log('Success Messages:', res.locals.success);
+    console.log('Error Messages:', res.locals.error);
 
-        console.log( res.locals.error)
- 
- 
-    next()
-})
+    next();
+});
+
 // app.get("/listings/search",(req,res)=>{
    
 //     console.log(req.query)

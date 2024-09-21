@@ -24,19 +24,19 @@
           <a class="nav-link" href="/listings/new"><strong style="color: red;">Airbnb your home</strong></a>
         </li>
 
-         <!-- Only show Logout if the user is logged in -->
+        <% if (currentuser) { %> <!-- Only show Logout if the user is logged in -->
           
           <li class="nav-item">
             <a class="nav-link" href="/user/Logout"><b style="color: red;">Logout</b></a>
           </li>
-     <!-- Only show SignUp and Login if the user is NOT logged in -->
+        <% } else { %> <!-- Only show SignUp and Login if the user is NOT logged in -->
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/user/signup"><b style="color: red;">SignUp</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/Login"><b style="color: red;">Login</b></a>
           </li>
-      
+        <% } %>
       </ul>
     </div>
   </div>
