@@ -21,27 +21,88 @@ h1 {
 }
 
 /* Navbar Styling */
+/* General Styles */
 .navbar {
     height: 5rem;
     background-color: white;
     z-index: 2;
     position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
 }
 
+/* Collapsible Navbar */
 .navbar-collapse {
     background-color: white !important;
 }
 
+/* Navbar Links */
 .nav-link {
     color: black !important;
     font-weight: 300;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
 }
 
+/* Hover Effects */
 .nav-link:hover {
     text-decoration: none;
+    color: white !important;
+    background-color: red;
     font-weight: 500;
-    transition: font-weight 0.6s;
 }
+
+/* Button Styles */
+.btn-danger {
+    background-color: red;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: darkred;
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .navbar {
+        height: auto; /* Allow for flexible height */
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .nav-item {
+        width: 100%; /* Full width for touch targets */
+        text-align: center; /* Center text */
+        padding: 0.5rem 0; /* Space between items */
+    }
+
+    .navbar-toggler {
+        border: none; /* Remove border */
+        background-color: red; /* Red background for toggler */
+    }
+
+    .navbar-toggler:hover {
+        background-color: darkred; /* Darker red on hover */
+    }
+
+    .navbar-collapse {
+        padding: 1rem 0; /* Add padding to collapsible area */
+    }
+}
+
 
 /* Compass Icon */
 .fa-compass {
