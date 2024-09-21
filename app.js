@@ -73,9 +73,7 @@ app.use('/listings', listing);
 app.use('/listings/:id/reviews', ReviewRouter);
 app.use('/user', userrouter);
 
-app.get('/', wrapAsync(async (req, res) => {
-    res.send('This is the root');
-}));
+
 
 app.get('/demo', async (req, res) => {
     let fakeuser = new User({
