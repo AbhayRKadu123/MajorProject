@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended:true}))
 module.exports.Categery_func=async(req,res)=>{
     
     const allListing=await Listing.find({category: req.query.value});
-    console.log(req.query.value)
+   
     res.render('listings/index.ejs', { allListing });
 }
 module.exports.search=async (req, res) => {

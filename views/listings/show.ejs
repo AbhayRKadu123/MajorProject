@@ -13,7 +13,7 @@
         <p class="price">₹ <%= Data.price.toLocaleString("en-IN") %> per night</p>
         <p class="location">Location: <%= Data.location %></p>
         <p>Country: <%= Data.country %></p>
-
+        <!-- typeof currentuser !== 'undefined' && currentuser -->
         <% if(currentuser && currentuser._id.equals(Data.owner._id)){ %>
             <a href="/listings/<%= Data._id %>/edit" class="btn btn-primary">Edit This Entry</a>
             <form method="post" action="/listings/<%= Data._id %>?_method=Delete" class="mt-3">

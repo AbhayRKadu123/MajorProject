@@ -2,7 +2,7 @@ const Listing=require('./Models/listing');
 const Review=require('./Models/reviews');
 module.exports.middleware=(req,res,next)=>{
 if(!req.isAuthenticated()){
-    console.log(req.originalUrl)
+
     req.session.url=req.originalUrl;
     req.flash("error","you must be logged in !")
     return res.redirect("/user/login")

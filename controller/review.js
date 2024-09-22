@@ -11,6 +11,7 @@ module.exports.CreateReview=async(req,res)=>{
     await list.save();
     req.flash('success', 'Review added !');
     res.redirect(`http://localhost:8080/listings/${req.params.id}`)
+   
 
 };
 
