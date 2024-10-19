@@ -49,7 +49,7 @@ module.exports.isReviewAuthor=async(req,res,next)=>{
     const review=await Review.findById(id2);
     if(res.locals.currentuser &&!res.locals.currentuser._id.equals(review.author._id)){
         req.flash('error', 'You are not the author of this review!');
-        return res.redirect(`http://localhost:8080/listings/${req.params.id}`)
+        return res.redirect(`/listings/${req.params.id}`)
       } else{
         next()
       }

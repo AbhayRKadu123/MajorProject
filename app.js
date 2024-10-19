@@ -21,8 +21,8 @@ const wrapAsync = require('./utils/wrapAsync');
 const ExpressError = require('./utils/ExpressError');
 
 const app = express();
-const url = process.env.ATLASDB_URL;
-// const url="mongodb://127.0.0.1:27017/wanderlust"
+// const url = process.env.ATLASDB_URL;
+const url="mongodb://127.0.0.1:27017/wanderlust"
 const secret = process.env.secret || 'fallback-secret'; // Fallback if not provided
 
 // Middleware
