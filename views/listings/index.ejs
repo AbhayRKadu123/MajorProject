@@ -66,11 +66,11 @@
         <!-- Create Listing Button -->
         <div class="container my-4">
             <form method="GET" action="/listings/new">
-                <button class="btn btn-primary mb-4">Airbnb your home</button>
+                <button style="border-radius: 50px;       border:none ; background-color: red" class="btn btn-primary mb-4">Airbnb your home</button>
             </form>
 
             <!-- Listings Section -->
-            <h1 class="mb-4 text-center">Explore new homes</h1>
+            <h1 style="color: red" class="mb-4 text-center">Explore new homes</h1>
             <div class="row">
                 <% if(allListing.length==0){%>
                     <h1 class="display-1 text-center">No Listing Available</h1>
@@ -83,10 +83,10 @@
                                 <img src="<%= lst.image.url %>" class="card-img-top" alt="<%= lst.title %>"
                                     style="height: 200px; object-fit: cover;">
                                 <div class="card-body">
-                                    <h5 class="card-title text-truncate">
+                                    <h5 style="color: red" class="card-title text-truncate">
                                         <%= lst.title %>
                                     </h5>
-                                    <p class="card-text">
+                                    <p style="color: red;" class="card-text">
                                         ₹<%= new Intl.NumberFormat('en-IN').format(lst.price) %> per night&ensp;&ensp;<span class="gst"  style="display:none;color: red;">+18%gst</span>
                                     </p>
                                 </div>

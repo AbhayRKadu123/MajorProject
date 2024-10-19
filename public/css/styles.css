@@ -49,8 +49,8 @@ h1 {
 .nav-link:hover {
     text-decoration: none;
     color: white !important;
-    background-color: red;
-    font-weight: 500;
+   /* color: rgb(202, 70, 70); */
+    font-size: large;
 }
 
 /* Button Styles */
@@ -89,14 +89,7 @@ h1 {
         padding: 0.5rem 0; /* Space between items */
     }
 
-    .navbar-toggler {
-        border: none; /* Remove border */
-        background-color: red; /* Red background for toggler */
-    }
-
-    .navbar-toggler:hover {
-        background-color: darkred; /* Darker red on hover */
-    }
+  
 
     .navbar-collapse {
         padding: 1rem 0; /* Add padding to collapsible area */
@@ -344,7 +337,7 @@ a:hover {
 }
 
 .filter-item i {
-    color: #89031c;
+    
     font-size: 16px;
     margin-bottom: 3px;
 }
@@ -352,7 +345,7 @@ a:hover {
 .filter-item span {
     display: block;
     font-size: 8px;
-    color: #333;
+   
 }
 
 /* Hover Effects */

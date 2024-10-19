@@ -18,3 +18,5 @@
   })()
   
 // Initialization for ES Users
+// Select all the stars and the hidden input for the rating
+
